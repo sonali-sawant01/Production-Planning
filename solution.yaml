@@ -1,0 +1,45 @@
+ID: production-planning-risk-agent
+_schema-version: "1.0.0"
+version: 1.0.0
+description: >
+  AI-powered Production Planning Risk Agent for SAP PP planners.
+  Analyzes production order risk (material shortages, capacity overloads,
+  supplier delays) using simulated SAP-like manufacturing data (prototype).
+  Provides MRP exception analysis, capacity analysis, order risk scoring,
+  and planner recommendations via a conversational browser UI.
+  data_source: SIMULATED (prototype) — no real SAP system connected.
+
+modules:
+  - name: pp-risk-agent
+    type: python-agent
+    path: agent
+    description: >
+      FastAPI backend serving the GPT-4o conversational agent with four
+      planning skills (MRP Exception Analyzer, Capacity Analyzer,
+      Order Risk Scorer, Planner Recommendation) and the built React UI.
+    parameters:
+      memory: 512M
+      disk-quota: 512M
+    properties:
+      PORT: 8080
+      PP_AGENT_MODEL: gpt-4o
+    build-parameters:
+      builder: custom
+      commands:
+        - npm --prefix ../ui install
+        - npm --prefix ../ui run build
+    requires:
+      - name: aicore-credentials
+    provides:
+      - name: pp-risk-agent-url
+        properties:
+          url: ${default-url}
+
+resources:
+  - name: aicore-credentials
+    type: org.cloudfoundry.user-provided-service
+    description: >
+      SAP AI Core service credentials providing the LLM proxy base URL
+      and API key for GPT-4o access.
+    parameters:
+      service-name: aicore-credentials

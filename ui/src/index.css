@@ -1,0 +1,33 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --sap-brand:        #0070f2;
+  --sap-brand-hover:  #0057c8;
+  --sap-critical:     #bb0000;
+  --sap-high:         #e76500;
+  --sap-medium:       #e9730c;
+  --sap-low:          #256f3a;
+  --sap-normal:       #256f3a;
+  --sap-watch:        #e9730c;
+  --bg:               #f5f6fa;
+  --surface:          #ffffff;
+  --border:           #d9dde3;
+  --text-primary:     #1d2d3e;
+  --text-secondary:   #556b82;
+  --radius:           10px;
+  --shadow:           0 2px 12px rgba(0,0,0,0.08);
+}
+
+body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  font-family: "72", "72full", Arial, Helvetica, sans-serif;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+a { color: var(--sap-brand); }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }

@@ -1,0 +1,11 @@
+{
+  "name": "production-planning-risk-agent",
+  "version": "1.0.0",
+  "description": "Production Planning Risk Agent for SAP PP planners",
+  "scripts": {
+    "build:ui": "npm --prefix ui run build",
+    "dev:ui": "npm --prefix ui run dev",
+    "dev:agent": "cd agent && uvicorn server:app --reload --port 8000",
+    "install:ui": "npm --prefix ui install"
+  }
+}

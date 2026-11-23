@@ -1,0 +1,26 @@
+_schema-version: '3.1'
+ID: production-planning-risk-agent
+version: 1.0.0
+description: Production Planning Risk Agent for SAP PP planners (simulated data, prototype)
+
+modules:
+  - name: pp-risk-agent-backend
+    type: python
+    path: agent
+    parameters:
+      buildpack: python_buildpack
+      memory: 512M
+      disk-quota: 512M
+    properties:
+      PORT: 8080
+    build-parameters:
+      builder: custom
+      commands:
+        - npm --prefix ../ui run build
+        - pip install -r requirements.txt
+    provides:
+      - name: pp-risk-agent-api
+        properties:
+          url: '${default-url}'
+
+resources: []
